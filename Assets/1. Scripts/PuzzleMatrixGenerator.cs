@@ -3,12 +3,16 @@ using System.Collections.Generic;
 using System.Drawing;
 using UnityEngine;
 
-public class PuzzleGenerator : MonoBehaviour
+public class PuzzleMatrixGenerator : MonoBehaviour
 {    
-    private const int SIZE = 4;
+    private const int SIZE = 8;
     private Piece[,] puzzleGrid = new Piece[SIZE, SIZE];
 
+    public Piece[,] PuzzleGrid => puzzleGrid;
+
     [SerializeField] private PuzzlePieceGenerator puzzlePieceGenerator;
+
+    [SerializeField] private CreatePieceFromMatrix createPieceFromMatrix;
 
     public void Start()
     {
@@ -78,6 +82,8 @@ public class PuzzleGenerator : MonoBehaviour
         }
 
         DebugLog();
+
+        createPieceFromMatrix.OnGenerateMatrixPieceSuccess();
     }
 
     [ContextMenu("Show Grid")]
@@ -111,8 +117,8 @@ public class PuzzleGenerator : MonoBehaviour
         Debug.Log($"Random bound at: {row}-{col}");
 
         int topFixed = row == 0 ? 0 : -2;
-        int rightFixed = col == 3 ? 0 : -2;
-        int bottomFixed = row == 3 ? 0 : -2;
+        int rightFixed = col == SIZE -1 ? 0 : -2;
+        int bottomFixed = row == SIZE -1 ? 0 : -2;
         int leftFixed = col == 0 ? 0 : -2;
 
         var neighbor = GetEdgeOfNeighbor(row, col);
@@ -192,46 +198,5 @@ public class PuzzleGenerator : MonoBehaviour
         int left = targetPiece.leftPiece == null ? -2 : targetPiece.leftPiece.rightEdge;
 
         return (top, right, bottom, left);
-    }
-
-    // private (int top, int right, int bottom, int left) GetValuePieceAround(int row, int col)
-    // {
-    //     int top = GetBottomEdgeOfPieceTop(row, col);        
-    //     int right = -2;        
-    //     int bottom = -2;        
-    //     int left = -2;
-
-    //     return surroundingPieces;
-    // }
-
-    bool IsPieceFit(Piece piece, int row, int col)
-    {
-        return true;
-        // Kiểm tra cạnh trên
-        if (row > 0 && puzzleGrid[row - 1, col] != null)
-        {
-            if (puzzleGrid[row - 1, col].edges[2] + piece.edges[0] != 3) return false;
-        }
-
-        // Kiểm tra cạnh trái
-        if (col > 0 && puzzleGrid[row, col - 1] != null)
-        {
-            if (puzzleGrid[row, col - 1].edges[1] + piece.edges[3] != 3) return false;
-        }
-
-        return true;
-    }
-
-    void DisplayPuzzleGrid()
-    {
-        // Hàm này chỉ để kiểm tra kết quả
-        for (int row = 0; row < SIZE; row++)
-        {
-            for (int col = 0; col < SIZE; col++)
-            {
-                Piece piece = puzzleGrid[row, col];
-                Debug.Log($"Piece at ({row}, {col}): Top={piece.edges[0]}, Right={piece.edges[1]}, Bottom={piece.edges[2]}, Left={piece.edges[3]}");
-            }
-        }
     }
 }

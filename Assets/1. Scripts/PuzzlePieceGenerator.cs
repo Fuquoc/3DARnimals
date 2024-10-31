@@ -95,7 +95,7 @@ public class PuzzlePieceGenerator : MonoBehaviour
     private void CreatePieceVisual(Piece piece)
     {
         var obj = Instantiate(_pieceVisualPrefab, transform);
-        obj.CreatePieceVisual(piece);
+        // obj.CreatePieceVisual(piece);
 
         obj.gameObject.SetActive(false);
 

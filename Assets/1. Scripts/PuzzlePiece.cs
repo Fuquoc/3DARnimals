@@ -1,66 +1,90 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
-public class PuzzlePieceVisual : MonoBehaviour
+public class PuzzlePieceVisual : MonoBehaviour ,IPointerDownHandler, IPointerUpHandler, IDragHandler
 {
     public Piece piece;
 
-    [SerializeField] private SpriteRenderer _spriteRenderer;
-    [SerializeField] private SpriteMask _spriteMask;
+    private Transform _lastParent;
+    private Transform _dragAreaTemp;
 
-    [SerializeField] private Texture2D _defaultTexture;
-    [SerializeField] private Texture2D _overlayTexture;
+    private int realWidth;
+    private int realHeight;
 
-    [SerializeField] private GameObject _cirle;
+    private PuzzleUIBoard PuzzleUIBoard;
 
-    public void CreatePieceVisual(Piece piece)
+    [SerializeField] private Image _imagePiece;
+
+    public PuzzlePieceCell puzzlePieceCellAttach;
+
+    public void Init(Transform DragArea, PuzzleUIBoard puzzleUIBoard)
     {
+        _dragAreaTemp = DragArea;
+        this.PuzzleUIBoard = puzzleUIBoard;
+    }
+
+    public void CreatePieceVisual(Piece piece, Texture2D texture2D)
+    {
+        realWidth = texture2D.width;
+        realHeight = texture2D.height;
+
+        Sprite mergedTexture = Sprite.Create(texture2D, new Rect(0, 0, texture2D.width, texture2D.height), new Vector2(0.5f, 0.5f)); 
+        _imagePiece.sprite = mergedTexture;
+
         this.piece = piece;
-        Texture2D combinedTexture = _defaultTexture;
-        if(piece.topEdge == 1)
-        {
-            GameObject cir = Instantiate(_cirle, transform);
-            cir.transform.localPosition = new Vector3(0, 2.5f, 0);
 
-        }
-        else if(piece.topEdge == -1)
-        {
-            combinedTexture = ImageMerger.InsertTextureTop(combinedTexture, _overlayTexture);
-        }
+        SetLastParent(transform.parent);
+    }
 
-        if(piece.rightEdge == 1)
-        {
-            GameObject cir = Instantiate(_cirle, transform);
-            cir.transform.localPosition = new Vector3(2.5f,0, 0);
-        } 
-        if(piece.rightEdge == -1)
-        {
-            combinedTexture = ImageMerger.InsertTextureRight(combinedTexture, _overlayTexture);
-        }
+public void RevertPieceToRealSize()
+    {
+        RectTransform rect = (RectTransform)transform;
 
-        if(piece.bottomEdge == 1)
-        {
-            GameObject cir = Instantiate(_cirle, transform);
-            cir.transform.localPosition = new Vector3(0,-2.5f, 0);
-        } 
-        if(piece.bottomEdge == -1)
-        {
-            combinedTexture = ImageMerger.InsertTextureBottom(combinedTexture, _overlayTexture);
-        }
+        rect.sizeDelta = new Vector2(realWidth, realHeight);
+    }
 
-        if(piece.leftEdge == 1)
-        {
-            GameObject cir = Instantiate(_cirle, transform);
-            cir.transform.localPosition = new Vector3(-2.5f, 0, 0);
-        } 
-        if(piece.leftEdge == -1)
-        {
-            combinedTexture = ImageMerger.InsertTextureLeft(combinedTexture, _overlayTexture);
-        }
+    private void SetLastParent(Transform parent)
+    {
+        _lastParent = parent;
+        transform.parent = parent;
+    }
+
+    private void BackToListPieceUnassembled()
+    {
+        transform.parent = _lastParent;
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        transform.position = Input.mousePosition;
         
-        Sprite mergedTexture = Sprite.Create(combinedTexture, new Rect(0, 0, combinedTexture.width, combinedTexture.height), new Vector2(0.5f, 0.5f)); 
-        _spriteRenderer.sprite = mergedTexture;
-        _spriteMask.sprite = mergedTexture;
-    }    
+        PuzzleUIBoard.FindNearestBlankCellPiece(eventData.position, out var cell);
+        PuzzleUIBoard.SelectCellToHighLight(cell);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        transform.parent = _dragAreaTemp;
+
+        RevertPieceToRealSize();
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if(PuzzleUIBoard.FindNearestBlankCellPiece(eventData.position, out var cell))
+        {
+            cell.AttachThePiece(this);
+        }
+        else if(puzzlePieceCellAttach != null)
+        {
+            puzzlePieceCellAttach.AttachThePiece(this);
+        }
+        else 
+        {
+            BackToListPieceUnassembled();
+        }
+    }
 }
