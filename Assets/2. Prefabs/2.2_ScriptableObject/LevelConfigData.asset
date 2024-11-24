@@ -1,0 +1,57 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e580f4684d8f50248972edbad1e3d1dc, type: 3}
+  m_Name: LevelConfigData
+  m_EditorClassIdentifier: 
+  levels:
+  - level: 1
+    levelName: "M\xE0n ch\u01A1i 1"
+    sizeMatrix: 2
+    originText: {fileID: 2800000, guid: 4d5cdfadf6c8a1b4f897ca23ce4d5110, type: 3}
+    animal: {fileID: 2101009556760856864, guid: 80de445141c0a114ebdb34a73773d244, type: 3}
+    isLock: 0
+  - level: 2
+    levelName: "M\xE0n ch\u01A1i 2"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 449c7a1db0ccc6745a9a55f21b482bd3, type: 3}
+    animal: {fileID: 2894449615367668957, guid: a8c6f8e0de904c849a4aec39c61b5d26, type: 3}
+    isLock: 0
+  - level: 3
+    levelName: "M\xE0n ch\u01A1i 3"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
+    animal: {fileID: 0}
+    isLock: 1
+  - level: 4
+    levelName: "M\xE0n ch\u01A1i 4"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
+    animal: {fileID: 0}
+    isLock: 1
+  - level: 5
+    levelName: "M\xE0n ch\u01A1i 5"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
+    animal: {fileID: 0}
+    isLock: 1
+  - level: 6
+    levelName: "M\xE0n ch\u01A1i 6"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
+    animal: {fileID: 0}
+    isLock: 1
+  - level: 7
+    levelName: "M\xE0n ch\u01A1i 7"
+    sizeMatrix: 4
+    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
+    animal: {fileID: 0}
+    isLock: 1

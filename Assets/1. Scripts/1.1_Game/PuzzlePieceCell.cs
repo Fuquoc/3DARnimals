@@ -13,8 +13,15 @@ public class PuzzlePieceCell : MonoBehaviour
 {
     [SerializeField] private Image _bgColor;
 
+    private PuzzleUIBoard _puzzleUIBoard;
+    private PuzzlePieceVisual _currentPuzzlePieceVisual;
     private EPieceCellState ePieceCellState = EPieceCellState.empty;
     private Coroutine _fadeOutRoutine;
+
+    public void Init(PuzzleUIBoard puzzleUIBoard)
+    {
+        _puzzleUIBoard = puzzleUIBoard;
+    }
 
     public void Highlight()
     {
@@ -51,12 +58,18 @@ public class PuzzlePieceCell : MonoBehaviour
         puzzlePieceVisual.puzzlePieceCellAttach = this;
         puzzlePieceVisual.transform.parent = transform;
         puzzlePieceVisual.transform.localPosition = Vector2.zero;
+
+        _currentPuzzlePieceVisual = puzzlePieceVisual;
+
+        _puzzleUIBoard.OnAnotherPuzzlePieceCellAttached();
     }
 
     public void Empty()
     {
         ePieceCellState = EPieceCellState.empty;
+        _currentPuzzlePieceVisual = null;
     }
 
     public bool IsEmpty() => ePieceCellState == EPieceCellState.empty;
+    public PuzzlePieceVisual GetPiece() => _currentPuzzlePieceVisual;
 }

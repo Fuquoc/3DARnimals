@@ -5,20 +5,35 @@ using UnityEngine;
 
 public class PuzzleMatrixGenerator : MonoBehaviour
 {    
-    private const int SIZE = 4;
-    private Piece[,] puzzleGrid = new Piece[SIZE, SIZE];
+    private int SIZE = 2;
+    private Piece[,] puzzleMatrixGrid;
 
-    public Piece[,] PuzzleGrid => puzzleGrid;
+    public Piece[,] PuzzleMatrixGrid => puzzleMatrixGrid;
 
     [SerializeField] private PuzzlePieceGenerator puzzlePieceGenerator;
 
     [SerializeField] private CreatePieceFromMatrix createPieceFromMatrix;
 
-    public void Start()
+    public void SetSize(int size)
+    {
+        SIZE = size;
+        puzzleMatrixGrid = new Piece[SIZE, SIZE];
+    }
+
+    public void StartGenerater()
     {
         GenerateTempPiece();
         AasignNeighborPiece();
         GeneratePuzzleGrid();
+
+        createPieceFromMatrix.OnGenerateMatrixPieceSuccess();
+    }
+
+    public void ReGenerateGrid()
+    {
+        GeneratePuzzleGrid();
+
+        createPieceFromMatrix.OnReGenerateMatrixPieceSuccess();
     }
 
     private void GenerateTempPiece()
@@ -28,7 +43,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
             for (int col = 0; col < SIZE; col++)
             {
                 Piece newPiece = new Piece(-2, -2, -2 , -2);
-                puzzleGrid[row,col] = newPiece;
+                puzzleMatrixGrid[row,col] = newPiece;
             }
         }
     }
@@ -39,7 +54,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         {
             for (int col = 0; col < SIZE; col++)
             {
-                Piece piece = puzzleGrid[row,col];
+                Piece piece = puzzleMatrixGrid[row,col];
 
                 piece.topPiece = GetPiece(row-1,col);
                 piece.rightPiece = GetPiece(row,col+1);
@@ -52,11 +67,11 @@ public class PuzzleMatrixGenerator : MonoBehaviour
     private Piece GetPiece(int row, int col)
     {
         // Kiểm tra giới hạn của bảng
-        if (row >= 0 && row < puzzleGrid.GetLength(0) && col >= 0 && col < puzzleGrid.GetLength(1))
+        if (row >= 0 && row < puzzleMatrixGrid.GetLength(0) && col >= 0 && col < puzzleMatrixGrid.GetLength(1))
         {
-            if (puzzleGrid[row, col] != null)
+            if (puzzleMatrixGrid[row, col] != null)
             {
-                return puzzleGrid[row, col];
+                return puzzleMatrixGrid[row, col];
             }
         }
 
@@ -82,8 +97,6 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         }
 
         DebugLog();
-
-        createPieceFromMatrix.OnGenerateMatrixPieceSuccess();
     }
 
     [ContextMenu("Show Grid")]
@@ -94,9 +107,9 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         {
             for(int col = 0; col < SIZE; col++)
             {
-                if(puzzleGrid[row,col] != null)
+                if(puzzleMatrixGrid[row,col] != null)
                 {
-                    log += puzzleGrid[row,col].PrintLog() + "  ";
+                    log += puzzleMatrixGrid[row,col].PrintLog() + "  ";
                 }
                 else 
                 {
@@ -133,7 +146,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         // Chọn một mảnh hợp lệ ngẫu nhiên từ các mảnh phù hợp
         Piece selectedPiece = validPieces[Random.Range(0, validPieces.Count)];
 
-        puzzleGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
+        puzzleMatrixGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
 
         return selectedPiece;
     }
@@ -157,7 +170,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         // Chọn một mảnh hợp lệ ngẫu nhiên từ các mảnh phù hợp
         Piece selectedPiece = validPieces[Random.Range(0, validPieces.Count)];
 
-        puzzleGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
+        puzzleMatrixGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
 
         return selectedPiece;  
     }
@@ -191,7 +204,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
 
     private (int top, int right, int bottom, int left) GetEdgeOfNeighbor(int row, int col)
     { 
-        Piece targetPiece = puzzleGrid[row, col];
+        Piece targetPiece = puzzleMatrixGrid[row, col];
         int top = targetPiece.topPiece == null ? -2 : targetPiece.topPiece.bottomEdge;
         int right = targetPiece.rightPiece == null ? -2 : targetPiece.rightPiece.leftEdge;
         int bottom = targetPiece.bottomPiece == null ? -2 : targetPiece.bottomPiece.topEdge;
