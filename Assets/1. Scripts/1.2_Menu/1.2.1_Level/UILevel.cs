@@ -31,6 +31,7 @@ public class UILevel : MonoBehaviour
         _levelConfigData = levelConfigData;
 
         _lock.SetActive(_levelConfigData.isLock);
+        _levelButton.enabled = _levelConfigData.isLock == false;
 
         _originImage.sprite = Sprite.Create(_levelConfigData.originText, 
                                             new Rect(0, 0, _levelConfigData.originText.width, 
@@ -38,7 +39,7 @@ public class UILevel : MonoBehaviour
                                             new Vector2(0.5f, 0.5f));
 
         _textNameLevel.text = $"Màn chơi {_levelConfigData.level}";
-        _textNumberPiece.text = $"{_levelConfigData.sizeMatrix * _levelConfigData.sizeMatrix} Mảnh";
+        _textNumberPiece.text = $"{_levelConfigData.sizeMatrix * _levelConfigData.sizeMatrix}";
     }
 
     private void OnClickLevel()
