@@ -147,6 +147,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         Piece selectedPiece = validPieces[Random.Range(0, validPieces.Count)];
 
         puzzleMatrixGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
+        puzzleMatrixGrid[row,col].SetRowColumn(row, col);
 
         return selectedPiece;
     }
@@ -171,7 +172,7 @@ public class PuzzleMatrixGenerator : MonoBehaviour
         Piece selectedPiece = validPieces[Random.Range(0, validPieces.Count)];
 
         puzzleMatrixGrid[row,col].SetEdge(selectedPiece.topEdge, selectedPiece.rightEdge, selectedPiece.bottomEdge, selectedPiece.leftEdge);
-
+        puzzleMatrixGrid[row,col].SetRowColumn(row, col);
         return selectedPiece;  
     }
 

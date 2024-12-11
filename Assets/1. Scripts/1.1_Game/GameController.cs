@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 
-public class GameController : MonoBehaviour
+public class GameController : Singleton<GameController>
 {
     [SerializeField] private PuzzleMatrixGenerator _puzzleMatrixGenerator;
     [SerializeField] private CreatePieceFromMatrix _createPieceFromMatrix;
@@ -15,12 +15,12 @@ public class GameController : MonoBehaviour
     [SerializeField] private int levelIndex;
     [SerializeField] private LevelConfig levelConfig;
 
-    private void OnEnable() 
+    private void Start() 
     {
-        _uIGameManager.OnClickResetGameButton.AddListener(ReStartGame);
+        LoadLevel();
     }
 
-    private void Start() 
+    private void LoadLevel()
     {
         LevelConfigData levelConfigData = null;
         if(DebugUseTestLevel == false)
@@ -44,5 +44,15 @@ public class GameController : MonoBehaviour
     public void ReStartGame()
     {
         _puzzleMatrixGenerator.ReGenerateGrid();
+    }
+
+    public void NextLevel()
+    {
+        LevelSelection.Instance.GoToNextLevel();
+    }
+
+    public void View3D()
+    {
+        _animalSpawner.SpawnAnimal();
     }
 }

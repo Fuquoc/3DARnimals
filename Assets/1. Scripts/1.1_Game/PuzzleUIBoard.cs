@@ -53,6 +53,7 @@ public class PuzzleUIBoard : MonoBehaviour
                 var cell = Instantiate(puzzlePieceCellPrefab, _layoutContent);
                 cell.Init(this);
                 cell.name = $"{puzzlePieceCellPrefab.name}[{row},{col}]";
+                cell.correctKey = _puzzleMatrixGenerator.PuzzleMatrixGrid[row,col].GetKeyRowColumn();
                 puzzlePieceCells[row,col] = cell;
             }
         }
@@ -106,7 +107,7 @@ public class PuzzleUIBoard : MonoBehaviour
         {
             for(int col = 0; col < _puzzleMatrixGenerator.PuzzleMatrixGrid.GetLength(0); col ++)
             {
-                if(_puzzleMatrixGenerator.PuzzleMatrixGrid[row,col].GetKey() == puzzlePieceCells[row,col].GetPiece().piece.GetKey())
+                if(_puzzleMatrixGenerator.PuzzleMatrixGrid[row,col].GetKeyRowColumn() == puzzlePieceCells[row,col].GetPiece().piece.GetKeyRowColumn())
                 {
                     Debug.Log($"Ô thứ [{row},{col}] chính xác");
                 }
@@ -130,5 +131,36 @@ public class PuzzleUIBoard : MonoBehaviour
         {
             cell.Empty();
         } 
+    }
+
+    public PuzzlePieceCell GetRandomCellEmptyOrWrongPiece() //lấy ngẫu nhiên ô cell đang trống hoặc sai piece
+    {
+        List<PuzzlePieceCell> listCellRightCondition = new List<PuzzlePieceCell>();
+
+        for(int row = 0; row < _puzzleMatrixGenerator.PuzzleMatrixGrid.GetLength(0); row ++)
+        {
+            for(int col = 0; col < _puzzleMatrixGenerator.PuzzleMatrixGrid.GetLength(0); col ++)
+            {   
+                PuzzlePieceCell cell = puzzlePieceCells[row,col];
+                if(cell.IsEmpty())
+                {
+                    listCellRightCondition.Add(cell);
+                }
+                else
+                {
+                    if(_puzzleMatrixGenerator.PuzzleMatrixGrid[row,col].GetKeyRowColumn() == cell.GetPiece().piece.GetKeyRowColumn())
+                    {
+                        Debug.Log($"Ô thứ [{row},{col}] chính xác");
+                    }
+                    else 
+                    {
+                        Debug.Log($"Ô thứ [{row},{col}] sai");
+                        listCellRightCondition.Add(cell);
+                    }   
+                }
+            }
+        }
+
+        return listCellRightCondition[UnityEngine.Random.Range(0, listCellRightCondition.Count)];
     }
 }

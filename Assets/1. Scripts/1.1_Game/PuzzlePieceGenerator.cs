@@ -6,6 +6,8 @@ using UnityEngine;
 public class Piece
 {
     public int[] edges = new int[4]; // 0 = phẳng, -1 là lõm, 1 là lồi
+    public int row;
+    public int column;
 
     public Piece topPiece;
     public Piece rightPiece;
@@ -38,6 +40,12 @@ public class Piece
         SetLeft(left);
     }
 
+    public void SetRowColumn(int row, int column)
+    {
+        this.row = row;
+        this.column = column;
+    }
+
     public string PrintLog()
     {
         string result = "";
@@ -49,9 +57,9 @@ public class Piece
         return result;
     }
 
-    public int GetKey()
+    public int GetKeyRowColumn()
     {
-        return topEdge * 1000 + rightEdge * 100 + bottomEdge * 10 + leftEdge;
+        return row * 1000 + column;
     }
 }
 
@@ -99,7 +107,7 @@ public class PuzzlePieceGenerator : MonoBehaviour
 
         obj.gameObject.SetActive(false);
 
-        puzzlePiecePrefabs.Add(piece.GetKey(),obj);
+        puzzlePiecePrefabs.Add(piece.GetKeyRowColumn(),obj);
     }
 
     public PuzzlePieceVisual GetPiece(int top, int right, int bottom, int left)
@@ -110,9 +118,9 @@ public class PuzzlePieceGenerator : MonoBehaviour
 
     public PuzzlePieceVisual GetPiece(Piece pieceData)
     {
-        if(puzzlePiecePrefabs.ContainsKey(pieceData.GetKey()))
+        if(puzzlePiecePrefabs.ContainsKey(pieceData.GetKeyRowColumn()))
         {
-            return puzzlePiecePrefabs[pieceData.GetKey()];
+            return puzzlePiecePrefabs[pieceData.GetKeyRowColumn()];
         }
         else
         {

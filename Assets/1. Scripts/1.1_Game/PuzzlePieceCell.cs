@@ -13,6 +13,8 @@ public class PuzzlePieceCell : MonoBehaviour
 {
     [SerializeField] private Image _bgColor;
 
+    public int correctKey {get; set;}
+
     private PuzzleUIBoard _puzzleUIBoard;
     private PuzzlePieceVisual _currentPuzzlePieceVisual;
     private EPieceCellState ePieceCellState = EPieceCellState.empty;
@@ -21,6 +23,48 @@ public class PuzzlePieceCell : MonoBehaviour
     public void Init(PuzzleUIBoard puzzleUIBoard)
     {
         _puzzleUIBoard = puzzleUIBoard;
+    }
+
+    public void AttachThePiece(PuzzlePieceVisual puzzlePieceVisual)
+    {
+        puzzlePieceVisual.puzzlePieceCellAttach?.Empty();
+
+        ePieceCellState = EPieceCellState.attached;
+        puzzlePieceVisual.puzzlePieceCellAttach = this;
+        puzzlePieceVisual.transform.parent = transform;
+        puzzlePieceVisual.transform.localPosition = Vector2.zero;
+
+        _currentPuzzlePieceVisual = puzzlePieceVisual;
+
+        CheckFinishHint();
+
+        _puzzleUIBoard.OnAnotherPuzzlePieceCellAttached();
+    }
+
+    public void Empty()
+    {
+        ePieceCellState = EPieceCellState.empty;
+        _currentPuzzlePieceVisual = null;
+    }
+
+    public void Hint()
+    {
+        if(_currentPuzzlePieceVisual != null)
+        {
+            _currentPuzzlePieceVisual.BackToListPieceUnassembled();
+        }   
+
+        GetComponent<FlickerSprite>().On();
+    }
+
+    private void CheckFinishHint()
+    {
+        if(_currentPuzzlePieceVisual.piece.GetKeyRowColumn() == correctKey)
+        {
+            GetComponent<FlickerSprite>().Off();
+            _currentPuzzlePieceVisual.FinishHint();
+            UIGameManager.Instance.FinishHint();
+        }
     }
 
     public void Highlight()
@@ -48,26 +92,6 @@ public class PuzzlePieceCell : MonoBehaviour
             a -= Time.deltaTime * 2;
             _bgColor.color = startColor * a;
         }
-    }
-
-    public void AttachThePiece(PuzzlePieceVisual puzzlePieceVisual)
-    {
-        puzzlePieceVisual.puzzlePieceCellAttach?.Empty();
-
-        ePieceCellState = EPieceCellState.attached;
-        puzzlePieceVisual.puzzlePieceCellAttach = this;
-        puzzlePieceVisual.transform.parent = transform;
-        puzzlePieceVisual.transform.localPosition = Vector2.zero;
-
-        _currentPuzzlePieceVisual = puzzlePieceVisual;
-
-        _puzzleUIBoard.OnAnotherPuzzlePieceCellAttached();
-    }
-
-    public void Empty()
-    {
-        ePieceCellState = EPieceCellState.empty;
-        _currentPuzzlePieceVisual = null;
     }
 
     public bool IsEmpty() => ePieceCellState == EPieceCellState.empty;

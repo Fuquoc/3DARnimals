@@ -1055,7 +1055,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000022888}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &710519326
@@ -1925,7 +1925,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0.00012207031}
   m_SizeDelta: {x: 599.0127, y: 1065.4437}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1214569933
@@ -2380,7 +2380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -8.529724}
+  m_AnchoredPosition: {x: 0, y: -8.529663}
   m_SizeDelta: {x: 0, y: -279.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1388322549
@@ -3079,7 +3079,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -8.529724}
+  m_AnchoredPosition: {x: 0, y: -8.529663}
   m_SizeDelta: {x: 0, y: -279.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1790445392
@@ -3516,6 +3516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDontDestroyOnLoad: 1
+  levelConfig: {fileID: 11400000, guid: e7be3dc0e754b98468e78b560e91eeaa, type: 2}
   _currentLevelSelect:
     level: 0
     levelName: 

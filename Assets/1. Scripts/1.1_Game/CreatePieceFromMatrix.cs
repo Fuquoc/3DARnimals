@@ -48,9 +48,9 @@ public class CreatePieceFromMatrix : MonoBehaviour
                 listPieceUnassembled.CreateUnassembledPiece(texturePiece, piece);
             }
         }
-
-        puzzleUIBoard.CreatePuzzleUIBoard(squareSize, rowLenght, colLenght);
+        
         puzzleUIBoard.AttachScriptGameObject(puzzleMatrixGenerator);
+        puzzleUIBoard.CreatePuzzleUIBoard(squareSize, rowLenght, colLenght);
     }
 
     public void OnReGenerateMatrixPieceSuccess() //chơi lại

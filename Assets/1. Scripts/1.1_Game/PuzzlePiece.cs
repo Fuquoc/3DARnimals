@@ -10,6 +10,7 @@ public class PuzzlePieceVisual : MonoBehaviour ,IPointerDownHandler, IPointerUpH
 
     private Transform _lastParent;
     private Transform _dragAreaTemp;
+    private RectTransform _rectTransform;
 
     private int realWidth;
     private int realHeight;
@@ -19,6 +20,11 @@ public class PuzzlePieceVisual : MonoBehaviour ,IPointerDownHandler, IPointerUpH
     [SerializeField] private Image _imagePiece;
 
     public PuzzlePieceCell puzzlePieceCellAttach;
+
+    private void Start() 
+    {
+        _rectTransform = GetComponent<RectTransform>();    
+    }
 
     public void Init(Transform DragArea, PuzzleUIBoard puzzleUIBoard)
     {
@@ -39,7 +45,7 @@ public class PuzzlePieceVisual : MonoBehaviour ,IPointerDownHandler, IPointerUpH
         SetLastParent(transform.parent);
     }
 
-public void RevertPieceToRealSize()
+    public void RevertPieceToRealSize()
     {
         RectTransform rect = (RectTransform)transform;
 
@@ -52,8 +58,10 @@ public void RevertPieceToRealSize()
         transform.parent = parent;
     }
 
-    private void BackToListPieceUnassembled()
+    public void BackToListPieceUnassembled()
     {
+        puzzlePieceCellAttach?.Empty();
+        puzzlePieceCellAttach = null;
         transform.parent = _lastParent;
     }
 
@@ -80,9 +88,9 @@ public void RevertPieceToRealSize()
         }
         else if(puzzlePieceCellAttach != null)
         {
-            if(Vector2.Distance(this.transform.position, puzzlePieceCellAttach.transform.position) > (realWidth+realHeight)/2)
+            if(Vector2.Distance(this.transform.position, puzzlePieceCellAttach.transform.position) > 
+                (_rectTransform.sizeDelta.x * _rectTransform.lossyScale.x +_rectTransform.sizeDelta.y * _rectTransform.lossyScale.y)/4)
             {
-                puzzlePieceCellAttach.Empty();
                 BackToListPieceUnassembled();
             }
             else
@@ -94,5 +102,16 @@ public void RevertPieceToRealSize()
         {
             BackToListPieceUnassembled();
         }
+    }
+
+    public void Hint()
+    {
+        BackToListPieceUnassembled();
+        GetComponent<FlickerSprite>().On();
+    }
+
+    public void FinishHint()
+    {
+        GetComponent<FlickerSprite>().Off();
     }
 }

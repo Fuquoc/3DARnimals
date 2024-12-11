@@ -4,9 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
-public class UIGameManager : MonoBehaviour
+public class UIGameManager : Singleton<UIGameManager>
 {
-    public UnityEvent OnClickResetGameButton;
+    [SerializeField] private FinishGamePopup _popupFinishGame;
+    [SerializeField] private PuzzleUIBoard _puzzleUIBoard;
+    [SerializeField] private ListPieceUnassembled _listPieceUnassembled;
 
     [SerializeField] private Button _buttonBack;
     [SerializeField] private Button _buttonHint;
@@ -17,23 +19,32 @@ public class UIGameManager : MonoBehaviour
 
     [SerializeField] private Image _originImage;
 
+    private bool isHint;
+
     private void OnEnable() 
     {
-        PuzzleUIBoard.OnFinishPuzzleGame += ShowUIAnimalView;
+        PuzzleUIBoard.OnFinishPuzzleGame += ShowPopupFinishGame;
         
         _buttonResetGame.onClick.AddListener(OnClickResetGame);
         _buttonBack.onClick.AddListener(OnClickButtonBack);
+        _buttonHint.onClick.AddListener(OnClickButtonHint);
     }
 
     private void OnDisable()
     {
-        PuzzleUIBoard.OnFinishPuzzleGame -= ShowUIAnimalView;
+        PuzzleUIBoard.OnFinishPuzzleGame -= ShowPopupFinishGame;
 
         _buttonResetGame.onClick.RemoveListener(OnClickResetGame);
+        _buttonHint.onClick.RemoveListener(OnClickButtonHint);
         _buttonBack.onClick.RemoveListener(OnClickButtonBack);
     }
 
-    private void ShowUIAnimalView()
+    private void ShowPopupFinishGame()
+    {
+        _popupFinishGame.Open();
+    }
+
+    public void ShowUIAnimalView()
     {
         StartCoroutine(FadeOut());
     }
@@ -62,11 +73,39 @@ public class UIGameManager : MonoBehaviour
 
     private void OnClickButtonBack()
     {
-        SceneLoader.Instance.LoadSceneAsync(0);
+        GoHome();
     }
 
     private void OnClickResetGame()
     {
-        OnClickResetGameButton?.Invoke();
+        GameController.Instance.ReStartGame();
+    }
+
+    public void GoHome()
+    {
+        SceneLoader.Instance.LoadSceneAsync(0);
+    }
+
+    public void NextLevel()
+    {
+        GameController.Instance.NextLevel();
+    }
+
+    private void OnClickButtonHint()
+    {
+        if(isHint) return;
+        
+        var cell = _puzzleUIBoard.GetRandomCellEmptyOrWrongPiece();
+        if(cell != null)
+        {
+            isHint = true;
+            cell.Hint();
+            _listPieceUnassembled.GetPieceVisual(cell.correctKey).Hint();
+        }
+    }
+
+    public void FinishHint()
+    {
+        isHint = false;
     }
 }

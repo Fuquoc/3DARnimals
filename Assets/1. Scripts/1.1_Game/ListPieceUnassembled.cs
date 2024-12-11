@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class ListPieceUnassembled : MonoBehaviour
@@ -34,5 +35,18 @@ public class ListPieceUnassembled : MonoBehaviour
         }
 
         _listPieceVisual.Clear();
+    }
+
+    public PuzzlePieceVisual GetPieceVisual(int pieceKey)
+    {
+        foreach(var vs in _listPieceVisual)
+        {
+            if(vs.piece.GetKeyRowColumn() == pieceKey)
+            {
+                return vs;
+            }
+        }
+
+        return null;
     }
 }
