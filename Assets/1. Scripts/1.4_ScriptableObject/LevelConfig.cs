@@ -19,7 +19,8 @@ public class LevelConfigData
     public Texture2D originText;
     public Animal animal;
     public LevelStarConfig levelStarConfig;
-    public LevelSound levelSound; 
+    public LevelSound levelSound;
+    public LevelAnimalImageGallery levelAnimalImageGallery;
 }
 
 [System.Serializable]
@@ -41,4 +42,18 @@ public class LevelStarConfig
     public int maxSecondToTake3Star;
     public int maxSecondToTake2Star;
     public int maxSecondToTake1Star;
+}
+
+[System.Serializable]
+public class LevelAnimalImageGallery
+{
+    public List<AnimalImageItem> animalImageItems;
+    public string urlVideo;
+}
+
+[System.Serializable]
+public class AnimalImageItem
+{
+    public string text;
+    public Sprite image;
 }

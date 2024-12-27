@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using System.Collections.Generic;
 using System.Collections;
+using UnityEngine.UI;
+
 
 #endregion
 
@@ -44,6 +46,8 @@ namespace TS.PageSlider
         [Tooltip("The index of the page to show at start")]
         [SerializeField] private int _startPageIndex;
 
+        [SerializeField] private Button _buttonClose;
+
         [Header("Events")]
 
         /// <summary>
@@ -65,6 +69,22 @@ namespace TS.PageSlider
         {
             _scroller = FindScroller();
         }
+
+        private void OnEnable()
+        {
+            _buttonClose.onClick.AddListener(OnClickButtonClose);
+        }
+
+        private void OnDisable()
+        {
+            _buttonClose.onClick.RemoveListener(OnClickButtonClose);
+        }
+
+        private void OnClickButtonClose()
+        {
+            this.gameObject.SetActive(false);
+        }
+
         private IEnumerator Start()
         {
             _scroller.OnPageChangeStarted.AddListener(PageScroller_PageChangeStarted);

@@ -94,12 +94,6 @@ namespace TS.PageSlider
         {
             _scrollRect = FindScrollRect();
         }
-
-        private void OnEnable() 
-        {
-            ResetCurrentPage(0); 
-        }
-
         private void Update()
         {
             // If there's no movement in progress (moveSpeed is 0), exit the function early.
@@ -143,14 +137,6 @@ namespace TS.PageSlider
             _targetPage = index;
             _currentPage = index;
             OnPageChangeEnded?.Invoke(0, _currentPage);
-        }
-
-        public void ResetCurrentPage(int index)
-        {
-            _scrollRect.horizontalNormalizedPosition = GetTargetPagePosition(index);
-
-            _targetPage = index;
-            _currentPage = index;
         }
 
         public void OnBeginDrag(PointerEventData eventData)

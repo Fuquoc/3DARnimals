@@ -7,17 +7,25 @@ public class UIAnimalViewScreen : MonoBehaviour
 {
     [SerializeField] private Button _buttonBack;
     [SerializeField] private Button _buttonAR;
+    [SerializeField] private Button _buttonGallery;
+    [SerializeField] private Button _buttonVideo;
+
+    [SerializeField] private GameObject _galleryUI;
 
     private void OnEnable() 
     {
         _buttonBack.onClick.AddListener(OnClickButtonBack);
         _buttonAR.onClick.AddListener(OnClickButtonAR);
+        _buttonGallery.onClick.AddListener(OnClickButtonGallery);
+        _buttonVideo.onClick.AddListener(OnClickButtonVideo);
     }
 
     private void OnDisable()
     {
         _buttonBack.onClick.RemoveListener(OnClickButtonBack);
         _buttonAR.onClick.RemoveListener(OnClickButtonAR);
+        _buttonGallery.onClick.RemoveListener(OnClickButtonGallery);
+        _buttonVideo.onClick.RemoveListener(OnClickButtonVideo);
     }
 
     private void OnClickButtonBack()
@@ -28,5 +36,15 @@ public class UIAnimalViewScreen : MonoBehaviour
     private void OnClickButtonAR()
     {
         SceneLoader.Instance.LoadSceneAsync(2);
+    }
+
+    private void OnClickButtonGallery()
+    {
+        _galleryUI.SetActive(true);
+    }
+
+    private void OnClickButtonVideo()
+    {
+        Application.OpenURL(LevelSelection.Instance._currentLevelSelect.levelAnimalImageGallery.urlVideo);
     }
 }

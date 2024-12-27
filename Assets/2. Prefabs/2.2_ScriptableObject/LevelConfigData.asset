@@ -31,6 +31,17 @@ MonoBehaviour:
       footAudioClip: {fileID: 8300000, guid: 8cce58c2b4d8db3468de8f5fec0e8e5d, type: 3}
       leatherAudioClip: {fileID: 8300000, guid: b92e775f46eaadc43b947729def429ad, type: 3}
       tailAudioClip: {fileID: 8300000, guid: f5fa5bccb0a64cb4e850938211cb0c44, type: 3}
+    levelAnimalImageGallery:
+      animalImageItems:
+      - text: Tegiac_1
+        image: {fileID: 21300000, guid: 1e8e093958a55994cb69a7db814fdfcb, type: 3}
+      - text: Tegiac_2
+        image: {fileID: 21300000, guid: c852932960ffeff438289b1b88a31f1f, type: 3}
+      - text: Tegiac_3
+        image: {fileID: 21300000, guid: 09ac10a5a27152f4d830d13f1485f4a6, type: 3}
+      - text: Tegiac_4
+        image: {fileID: 21300000, guid: 76a8705787822e94d8878d543fecff0c, type: 3}
+      urlVideo: https://www.youtube.com/watch?v=TYklMREHD-s&ab_channel=FreeSchool
   - level: 2
     levelName: "M\xE0n ch\u01A1i 2"
     sizeMatrix: 3
@@ -49,6 +60,17 @@ MonoBehaviour:
       footAudioClip: {fileID: 8300000, guid: 8a3111bed74f2bd44bd9fbcfb4077239, type: 3}
       leatherAudioClip: {fileID: 8300000, guid: 3289208304d80674a873637e77234b4a, type: 3}
       tailAudioClip: {fileID: 8300000, guid: faf1e95feaa8956428b63a033659a898, type: 3}
+    levelAnimalImageGallery:
+      animalImageItems:
+      - text: huoucaoco_1
+        image: {fileID: 21300000, guid: 1e8a9c039388a7940b592809d9bfbbce, type: 3}
+      - text: huoucaoco_2
+        image: {fileID: 21300000, guid: 5ea211069c7d7e947af5ab961c1e95db, type: 3}
+      - text: huoucaoco_3
+        image: {fileID: 21300000, guid: 4311f513cd36fec48a3de1343caa063b, type: 3}
+      - text: huoucaoco_4
+        image: {fileID: 21300000, guid: 3f263be708e86304a8b6d02cc960d1b1, type: 3}
+      urlVideo: https://www.youtube.com/watch?v=P_ckAbOr0r4&ab_channel=NatGeoAnimals
   - level: 3
     levelName: "M\xE0n ch\u01A1i 3"
     sizeMatrix: 4
@@ -67,6 +89,9 @@ MonoBehaviour:
       footAudioClip: {fileID: 0}
       leatherAudioClip: {fileID: 0}
       tailAudioClip: {fileID: 0}
+    levelAnimalImageGallery:
+      animalImageItems: []
+      urlVideo: 
   - level: 4
     levelName: "M\xE0n ch\u01A1i 4"
     sizeMatrix: 4
@@ -85,6 +110,9 @@ MonoBehaviour:
       footAudioClip: {fileID: 0}
       leatherAudioClip: {fileID: 0}
       tailAudioClip: {fileID: 0}
+    levelAnimalImageGallery:
+      animalImageItems: []
+      urlVideo: 
   - level: 5
     levelName: "M\xE0n ch\u01A1i 5"
     sizeMatrix: 4
@@ -103,6 +131,9 @@ MonoBehaviour:
       footAudioClip: {fileID: 0}
       leatherAudioClip: {fileID: 0}
       tailAudioClip: {fileID: 0}
+    levelAnimalImageGallery:
+      animalImageItems: []
+      urlVideo: 
   - level: 6
     levelName: "M\xE0n ch\u01A1i 6"
     sizeMatrix: 4
@@ -121,6 +152,9 @@ MonoBehaviour:
       footAudioClip: {fileID: 0}
       leatherAudioClip: {fileID: 0}
       tailAudioClip: {fileID: 0}
+    levelAnimalImageGallery:
+      animalImageItems: []
+      urlVideo: 
   - level: 7
     levelName: "M\xE0n ch\u01A1i 7"
     sizeMatrix: 4
@@ -139,3 +173,6 @@ MonoBehaviour:
       footAudioClip: {fileID: 0}
       leatherAudioClip: {fileID: 0}
       tailAudioClip: {fileID: 0}
+    levelAnimalImageGallery:
+      animalImageItems: []
+      urlVideo: 
