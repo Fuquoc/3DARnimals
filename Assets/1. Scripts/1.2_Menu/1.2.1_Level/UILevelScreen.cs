@@ -16,10 +16,15 @@ public class UILevelScreen : MonoBehaviour
 
     private void InitLevel()
     {
+        PlayerData playerData = JsonDataHandler.LoadData<PlayerData>();
+
+        int indexLevel = 0;
+
         foreach(var levelData in _levelConfig.Levels)
         {
             var ui = Instantiate(_uILevelPrefab, _content);
-            ui.Init(levelData);
+            ui.Init(levelData, playerData.playerLevelDatas[indexLevel]);
+            indexLevel++;
         }
     }
 }

@@ -16,6 +16,8 @@ public class UILevel : MonoBehaviour
 
     [SerializeField] private GameObject _lock;
 
+    [SerializeField] private GameObject[] starUIArray;
+
     private void OnEnable() 
     {
         _levelButton.onClick.AddListener(OnClickLevel);
@@ -26,12 +28,12 @@ public class UILevel : MonoBehaviour
         _levelButton.onClick.RemoveListener(OnClickLevel);
     }
 
-    public void Init(LevelConfigData levelConfigData)
+    public void Init(LevelConfigData levelConfigData, PlayerLevelData playerLevelData)
     {
         _levelConfigData = levelConfigData;
 
-        _lock.SetActive(_levelConfigData.isLock);
-        _levelButton.enabled = _levelConfigData.isLock == false;
+        _lock.SetActive(playerLevelData.pass == false && playerLevelData.isCurrentLevel == false);
+        _levelButton.enabled = playerLevelData.pass || playerLevelData.isCurrentLevel;
 
         _originImage.sprite = Sprite.Create(_levelConfigData.originText, 
                                             new Rect(0, 0, _levelConfigData.originText.width, 
@@ -40,10 +42,22 @@ public class UILevel : MonoBehaviour
 
         _textNameLevel.text = $"Màn chơi {_levelConfigData.level}";
         _textNumberPiece.text = $"{_levelConfigData.sizeMatrix * _levelConfigData.sizeMatrix}";
+
+        ShowStar(playerLevelData.star);
     }
 
     private void OnClickLevel()
     {
         LevelSelection.Instance.PlayLevel(_levelConfigData);
+    }
+
+    private void ShowStar(int star)
+    {
+        foreach(var ui in starUIArray)
+        {
+            ui.SetActive(false);
+        }
+
+        starUIArray[star].SetActive(true);
     }
 }

@@ -9,8 +9,7 @@ using UnityEngine.EventSystems;
 
 public class ARRaycastHitFollower : MonoBehaviour
 {
-    public static event Action OnTouchInIndicator;
-
+    public ObjectSpawner _objectSpawner;
     public GameObject _indicator;
     public ARRaycastManager arRaycastManager;
     public LayerMask _indicatorLayerMask;
@@ -60,7 +59,9 @@ public class ARRaycastHitFollower : MonoBehaviour
             RaycastHit hit;
             if (Physics.Raycast(ray, out hit, 100f, _indicatorLayerMask))
             {
-                OnTouchInIndicator?.Invoke();
+                _objectSpawner.SpawnAnimal(hit.transform.position);
+
+                DeActiveIndicator();
             }
         }
     }

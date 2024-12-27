@@ -18,5 +18,27 @@ public class LevelConfigData
     public int sizeMatrix;
     public Texture2D originText;
     public Animal animal;
-    public bool isLock;
+    public LevelStarConfig levelStarConfig;
+    public LevelSound levelSound; 
+}
+
+[System.Serializable]
+public class LevelSound
+{
+    public AudioClip eyeAudioClip;
+    public AudioClip noseAudioClip;
+    public AudioClip mouthAudioClip;
+    public AudioClip earAudioClip;
+    public AudioClip brainAudioClip;
+    public AudioClip footAudioClip;
+    public AudioClip leatherAudioClip;
+    public AudioClip tailAudioClip;
+}
+
+[System.Serializable]
+public class LevelStarConfig
+{
+    public int maxSecondToTake3Star;
+    public int maxSecondToTake2Star;
+    public int maxSecondToTake1Star;
 }

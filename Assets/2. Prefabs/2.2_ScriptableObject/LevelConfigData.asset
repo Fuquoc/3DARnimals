@@ -18,40 +18,124 @@ MonoBehaviour:
     sizeMatrix: 2
     originText: {fileID: 2800000, guid: 4d5cdfadf6c8a1b4f897ca23ce4d5110, type: 3}
     animal: {fileID: 2101009556760856864, guid: 80de445141c0a114ebdb34a73773d244, type: 3}
-    isLock: 0
+    levelStarConfig:
+      maxSecondToTake3Star: 10
+      maxSecondToTake2Star: 20
+      maxSecondToTake1Star: 30
+    levelSound:
+      eyeAudioClip: {fileID: 8300000, guid: 3ee016abda9421848b49a3d9b7e8b43e, type: 3}
+      noseAudioClip: {fileID: 8300000, guid: d0b3a66511ba18e4fb0af8d6483d3997, type: 3}
+      mouthAudioClip: {fileID: 8300000, guid: 77eb5433d5a39614d8462e1ede3f41ae, type: 3}
+      earAudioClip: {fileID: 8300000, guid: f5fa5bccb0a64cb4e850938211cb0c44, type: 3}
+      brainAudioClip: {fileID: 8300000, guid: 35b7c71382cbaed408855ad43b5f4c9f, type: 3}
+      footAudioClip: {fileID: 8300000, guid: 8cce58c2b4d8db3468de8f5fec0e8e5d, type: 3}
+      leatherAudioClip: {fileID: 8300000, guid: b92e775f46eaadc43b947729def429ad, type: 3}
+      tailAudioClip: {fileID: 8300000, guid: f5fa5bccb0a64cb4e850938211cb0c44, type: 3}
   - level: 2
     levelName: "M\xE0n ch\u01A1i 2"
-    sizeMatrix: 4
+    sizeMatrix: 3
     originText: {fileID: 2800000, guid: 449c7a1db0ccc6745a9a55f21b482bd3, type: 3}
-    animal: {fileID: 2894449615367668957, guid: a8c6f8e0de904c849a4aec39c61b5d26, type: 3}
-    isLock: 0
+    animal: {fileID: 3500411976338629311, guid: a8c6f8e0de904c849a4aec39c61b5d26, type: 3}
+    levelStarConfig:
+      maxSecondToTake3Star: 20
+      maxSecondToTake2Star: 30
+      maxSecondToTake1Star: 40
+    levelSound:
+      eyeAudioClip: {fileID: 8300000, guid: 3e9d8f349d0e43f4c99a6b6fb13554b4, type: 3}
+      noseAudioClip: {fileID: 8300000, guid: d8c510b0c3ea6054fbedbd3c2dcb51db, type: 3}
+      mouthAudioClip: {fileID: 8300000, guid: 03751c707c972d14c843c030085ae96b, type: 3}
+      earAudioClip: {fileID: 8300000, guid: d6a97a8f6c3683846be0afdf50eba7ed, type: 3}
+      brainAudioClip: {fileID: 8300000, guid: f3f23d667a6ffa444a826fdfa67a58ec, type: 3}
+      footAudioClip: {fileID: 8300000, guid: 8a3111bed74f2bd44bd9fbcfb4077239, type: 3}
+      leatherAudioClip: {fileID: 8300000, guid: 3289208304d80674a873637e77234b4a, type: 3}
+      tailAudioClip: {fileID: 8300000, guid: faf1e95feaa8956428b63a033659a898, type: 3}
   - level: 3
     levelName: "M\xE0n ch\u01A1i 3"
     sizeMatrix: 4
     originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
     animal: {fileID: 0}
-    isLock: 1
+    levelStarConfig:
+      maxSecondToTake3Star: 0
+      maxSecondToTake2Star: 0
+      maxSecondToTake1Star: 0
+    levelSound:
+      eyeAudioClip: {fileID: 0}
+      noseAudioClip: {fileID: 0}
+      mouthAudioClip: {fileID: 0}
+      earAudioClip: {fileID: 0}
+      brainAudioClip: {fileID: 0}
+      footAudioClip: {fileID: 0}
+      leatherAudioClip: {fileID: 0}
+      tailAudioClip: {fileID: 0}
   - level: 4
     levelName: "M\xE0n ch\u01A1i 4"
     sizeMatrix: 4
     originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
     animal: {fileID: 0}
-    isLock: 1
+    levelStarConfig:
+      maxSecondToTake3Star: 0
+      maxSecondToTake2Star: 0
+      maxSecondToTake1Star: 0
+    levelSound:
+      eyeAudioClip: {fileID: 0}
+      noseAudioClip: {fileID: 0}
+      mouthAudioClip: {fileID: 0}
+      earAudioClip: {fileID: 0}
+      brainAudioClip: {fileID: 0}
+      footAudioClip: {fileID: 0}
+      leatherAudioClip: {fileID: 0}
+      tailAudioClip: {fileID: 0}
   - level: 5
     levelName: "M\xE0n ch\u01A1i 5"
     sizeMatrix: 4
     originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
     animal: {fileID: 0}
-    isLock: 1
+    levelStarConfig:
+      maxSecondToTake3Star: 0
+      maxSecondToTake2Star: 0
+      maxSecondToTake1Star: 0
+    levelSound:
+      eyeAudioClip: {fileID: 0}
+      noseAudioClip: {fileID: 0}
+      mouthAudioClip: {fileID: 0}
+      earAudioClip: {fileID: 0}
+      brainAudioClip: {fileID: 0}
+      footAudioClip: {fileID: 0}
+      leatherAudioClip: {fileID: 0}
+      tailAudioClip: {fileID: 0}
   - level: 6
     levelName: "M\xE0n ch\u01A1i 6"
     sizeMatrix: 4
     originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
     animal: {fileID: 0}
-    isLock: 1
+    levelStarConfig:
+      maxSecondToTake3Star: 0
+      maxSecondToTake2Star: 0
+      maxSecondToTake1Star: 0
+    levelSound:
+      eyeAudioClip: {fileID: 0}
+      noseAudioClip: {fileID: 0}
+      mouthAudioClip: {fileID: 0}
+      earAudioClip: {fileID: 0}
+      brainAudioClip: {fileID: 0}
+      footAudioClip: {fileID: 0}
+      leatherAudioClip: {fileID: 0}
+      tailAudioClip: {fileID: 0}
   - level: 7
     levelName: "M\xE0n ch\u01A1i 7"
     sizeMatrix: 4
     originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
     animal: {fileID: 0}
-    isLock: 1
+    levelStarConfig:
+      maxSecondToTake3Star: 0
+      maxSecondToTake2Star: 0
+      maxSecondToTake1Star: 0
+    levelSound:
+      eyeAudioClip: {fileID: 0}
+      noseAudioClip: {fileID: 0}
+      mouthAudioClip: {fileID: 0}
+      earAudioClip: {fileID: 0}
+      brainAudioClip: {fileID: 0}
+      footAudioClip: {fileID: 0}
+      leatherAudioClip: {fileID: 0}
+      tailAudioClip: {fileID: 0}

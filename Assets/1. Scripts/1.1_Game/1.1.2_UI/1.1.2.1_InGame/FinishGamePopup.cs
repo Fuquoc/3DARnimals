@@ -18,6 +18,8 @@ public class FinishGamePopup : MonoBehaviour
     [SerializeField] private Button _buttonNextLevel; 
     [SerializeField] private Button _buttonView3D;
 
+    [SerializeField] private GameObject[] starUIArray;
+
     public void Open()
     {
         gameObject.SetActive(true);
@@ -43,15 +45,47 @@ public class FinishGamePopup : MonoBehaviour
     {
         LevelConfigData lvconfigData = LevelSelection.Instance._currentLevelSelect;
 
-        InitText(lvconfigData.level, lvconfigData.sizeMatrix, 360);
+        int star = 0;
+        float timePlayGame = GameController.Instance.TimePlayGame;
+
+        if(timePlayGame <= lvconfigData.levelStarConfig.maxSecondToTake3Star)
+        {
+            star = 3;
+        }
+        else if(timePlayGame <= lvconfigData.levelStarConfig.maxSecondToTake2Star)
+        {
+            star = 2;
+        }
+        else if(timePlayGame <= lvconfigData.levelStarConfig.maxSecondToTake1Star)
+        {
+            star = 1;
+        }
+
+        InitText(lvconfigData.level, lvconfigData.sizeMatrix, timePlayGame, star);
     }
 
     // Hàm khởi tạo nội dung chữ
-    public void InitText(int level, int sizeMatrix, float timeInSeconds)
+    public void InitText(int level, int sizeMatrix, float timeInSeconds, int star)
     {
         _textLevelName.text = $"Màn chơi {level}";
         _textPieceCount.text = $"{sizeMatrix * sizeMatrix} Mảnh";
         _textTime.text = $"Time: {FormatTime(timeInSeconds)}";
+        StartCoroutine(ShowStar(star));
+        Player.Instance.SavePlayerPassLevel(timeInSeconds, star);
+    }
+
+    private IEnumerator ShowStar(int star)
+    {
+        for(int i = 0; i < starUIArray.Length; i++)
+        {
+            starUIArray[i].SetActive(false);
+        }
+
+        for(int i = 0; i < star; i++)
+        {
+            yield return new WaitForSeconds(0.25f);
+            starUIArray[i].SetActive(true);
+        }
     }
 
     // Hàm định dạng thời gian thành "MM:SS"

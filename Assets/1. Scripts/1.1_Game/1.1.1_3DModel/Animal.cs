@@ -4,5 +4,9 @@ using UnityEngine;
 
 public class Animal : MonoBehaviour
 {
-
+    [ContextMenu("Show Scale")]
+    public void ShowLossyScale()
+    {
+        Debug.Log(transform.lossyScale);
+    }
 }

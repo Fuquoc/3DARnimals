@@ -15,6 +15,8 @@ public class GameController : Singleton<GameController>
     [SerializeField] private int levelIndex;
     [SerializeField] private LevelConfig levelConfig;
 
+    public float TimePlayGame;
+
     private void Start() 
     {
         LoadLevel();
@@ -43,6 +45,7 @@ public class GameController : Singleton<GameController>
 
     public void ReStartGame()
     {
+        TimePlayGame = 0;
         _puzzleMatrixGenerator.ReGenerateGrid();
     }
 
@@ -54,5 +57,10 @@ public class GameController : Singleton<GameController>
     public void View3D()
     {
         _animalSpawner.SpawnAnimal();
+    }
+
+    private void Update() 
+    {
+        TimePlayGame += Time.deltaTime;   
     }
 }
