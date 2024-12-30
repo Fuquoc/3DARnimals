@@ -27,6 +27,9 @@ public class Player : Singleton<Player>
     {
         playerData = new PlayerData();
         playerData.currentLevel = 1;
+        playerData.name = string.Empty;
+        playerData.age = -1;
+        playerData.avatarName = string.Empty;
 
         foreach(var level in levelConfig.Levels)
         {
@@ -79,15 +82,15 @@ public class Player : Singleton<Player>
 
 [System.Serializable]
 public class PlayerData {
+    public string name;
+    public int age;
+    public string avatarName;
     public int currentLevel = 0;
     public List<PlayerLevelData> playerLevelDatas = new List<PlayerLevelData>();
 }
 
 [System.Serializable]
 public class PlayerLevelData {
-    public string name;
-    public string age;
-    public int avatarName;
     public bool isCurrentLevel;
     public bool pass;
     public int level;
