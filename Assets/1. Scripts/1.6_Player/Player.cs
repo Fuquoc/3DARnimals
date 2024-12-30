@@ -85,6 +85,9 @@ public class PlayerData {
 
 [System.Serializable]
 public class PlayerLevelData {
+    public string name;
+    public string age;
+    public int avatarName;
     public bool isCurrentLevel;
     public bool pass;
     public int level;

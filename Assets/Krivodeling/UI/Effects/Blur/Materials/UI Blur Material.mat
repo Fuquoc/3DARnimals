@@ -31,10 +31,10 @@ Material:
     m_Floats:
     - _FlipX: 0
     - _FlipY: 0
-    - _Intensity: 1
-    - _Multiplier: 0.15
+    - _Intensity: 0.583
+    - _Multiplier: 0.354
     - _blurSizeXY: 1
     - _intensity: 0
     m_Colors:
-    - _Color: {r: 0.6792453, g: 0.6792453, b: 0.6792453, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
   m_BuildTextureStacks: []
