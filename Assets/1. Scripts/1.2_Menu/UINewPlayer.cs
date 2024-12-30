@@ -20,6 +20,11 @@ public class UINewPlayer : MonoBehaviour
             enterName.gameObject.SetActive(true);
             bg.SetActive(true);
         }
+        else 
+        {
+            enterName.gameObject.SetActive(false);
+            bg.SetActive(false);
+        }
     }
 
     public void EnterName(string name)
@@ -40,6 +45,7 @@ public class UINewPlayer : MonoBehaviour
     {
         currentPlayerData.avatarName = avtname;
         enterAvatar.gameObject.SetActive(false);
+        bg.SetActive(false);
 
         JsonDataHandler.SaveData(currentPlayerData);
     }
