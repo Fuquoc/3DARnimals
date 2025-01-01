@@ -102,6 +102,8 @@ public class PuzzlePieceVisual : MonoBehaviour ,IPointerDownHandler, IPointerUpH
         {
             BackToListPieceUnassembled();
         }
+
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.JigsawPut);
     }
 
     public void Hint()

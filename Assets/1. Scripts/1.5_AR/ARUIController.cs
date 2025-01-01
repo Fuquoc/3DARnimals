@@ -20,5 +20,6 @@ public class ARUIController : MonoBehaviour
     private void OnClickButtonBack()
     {
         SceneLoader.Instance.LoadSceneAsync(0);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 }

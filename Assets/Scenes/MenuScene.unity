@@ -4587,6 +4587,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _useDontDestroyOnLoad: 1
+  listSoundFX:
+  - audioClip: {fileID: 8300000, guid: 29bde6326b4c34ad8a12da475f79b50a, type: 3}
+    soundFXType: 1
+  - audioClip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+    soundFXType: 0
+  - audioClip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+    soundFXType: 2
   _musicSource: {fileID: 1275853522}
   _soundEffectSource: {fileID: 1275853524}
   musicVolume: 1

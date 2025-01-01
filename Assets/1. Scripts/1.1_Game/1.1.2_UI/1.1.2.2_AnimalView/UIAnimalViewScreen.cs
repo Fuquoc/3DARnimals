@@ -31,20 +31,24 @@ public class UIAnimalViewScreen : MonoBehaviour
     private void OnClickButtonBack()
     {
         SceneLoader.Instance.LoadSceneAsync(0);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonAR()
     {
         SceneLoader.Instance.LoadSceneAsync(2);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonGallery()
     {
         _galleryUI.SetActive(true);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonVideo()
     {
         Application.OpenURL(LevelSelection.Instance._currentLevelSelect.levelAnimalImageGallery.urlVideo);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 }

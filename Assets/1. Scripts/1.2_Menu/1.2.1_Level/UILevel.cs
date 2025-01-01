@@ -49,6 +49,7 @@ public class UILevel : MonoBehaviour
     private void OnClickLevel()
     {
         LevelSelection.Instance.PlayLevel(_levelConfigData);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void ShowStar(int star)

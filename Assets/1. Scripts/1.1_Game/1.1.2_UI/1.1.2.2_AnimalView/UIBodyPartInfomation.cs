@@ -130,7 +130,7 @@ public class UIBodyPartInfomation : MonoBehaviour
 
             if (SoundController.Instance != null && clip != null)
             {
-                SoundController.Instance.PlaySoundEffect(clip);
+                SoundController.Instance.PlaySound(clip);
             }
 
             _isPlay = true;

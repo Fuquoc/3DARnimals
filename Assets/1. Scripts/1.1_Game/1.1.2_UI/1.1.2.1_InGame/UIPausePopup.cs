@@ -83,6 +83,7 @@ public class UIPausePopup : MonoBehaviour
     {
         Debug.Log("Continue button clicked!");
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     // Hàm sự kiện khi nhấn nút Restart Game
@@ -91,6 +92,7 @@ public class UIPausePopup : MonoBehaviour
         Debug.Log("Restart Game button clicked!");
         GameController.Instance.ReStartGame();
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     // Hàm sự kiện khi nhấn nút Home
@@ -99,6 +101,7 @@ public class UIPausePopup : MonoBehaviour
         Debug.Log("Home button clicked!");
         uIGameManager.GoHome();
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void Close()

@@ -1,13 +1,24 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SoundController : Singleton<SoundController>
 {
+    [SerializeField] private List<SoundFX> listSoundFX;
+
     [SerializeField] private AudioSource _musicSource;
     [SerializeField] private AudioSource _soundEffectSource;
 
     [Range(0, 1)] public float musicVolume = 1f; // Âm lượng nhạc nền
     [Range(0, 1)] public float soundEffectVolume = 1f; // Âm lượng sound effect
+
+    private void Start() 
+    {
+        var cur = Player.Instance.GetPlayerData;
+
+        _musicSource.volume = cur.musicVolumeSetting;
+        _soundEffectSource.volume = cur.soundVolumeSetting;    
+    }
 
     protected override void Awake() 
     {
@@ -42,7 +53,25 @@ public class SoundController : Singleton<SoundController>
         _musicSource.Play();
     }
 
-    public void PlaySoundEffect(AudioClip clip)
+    public void PlaySoundEffectOneShot(SoundFXType soundFXType)
+    {
+        // Tìm clip phù hợp từ danh sách SoundFX
+        SoundFX soundFX = listSoundFX.Find(sfx => sfx.soundFXType == soundFXType);
+
+        if (soundFX == null || soundFX.audioClip == null)
+        {
+            Debug.LogWarning($"SoundController: Không tìm thấy sound effect cho {soundFXType}!");
+            return;
+        }
+
+        _soundEffectSource.volume = soundEffectVolume;
+        _soundEffectSource.PlayOneShot(soundFX.audioClip);
+
+        // Bắt đầu điều chỉnh âm lượng nhạc nền
+        StartCoroutine(AdjustMusicVolumeWhileSoundEffectPlays());
+    }
+
+    public void PlaySound(AudioClip clip)
     {
         if (clip == null)
         {
@@ -51,8 +80,13 @@ public class SoundController : Singleton<SoundController>
         }
 
         _soundEffectSource.volume = soundEffectVolume;
-        _soundEffectSource.PlayOneShot(clip); // PlayOneShot cho phép phát nhiều sound effect đồng thời
+        _soundEffectSource.clip = clip;
+        _soundEffectSource.Play();
+
+        // Bắt đầu điều chỉnh âm lượng nhạc nền
+        StartCoroutine(AdjustMusicVolumeWhileSoundEffectPlays());
     }
+
 
     public void ResumeSoundEffect()
     {
@@ -99,4 +133,34 @@ public class SoundController : Singleton<SoundController>
             _musicSource.Stop();
         }
     }
+
+    private IEnumerator AdjustMusicVolumeWhileSoundEffectPlays()
+    {
+        // Giảm âm lượng nhạc nền
+        _musicSource.volume = 0.1f;
+
+        // Chờ sound effect phát xong
+        while (_soundEffectSource.isPlaying)
+        {
+            yield return null;
+        }
+
+        // Phục hồi âm lượng nhạc nền
+        _musicSource.volume = musicVolume;
+    }
+
+}
+
+[System.Serializable]
+public class SoundFX
+{
+    public AudioClip audioClip;
+    public SoundFXType soundFXType;
+}
+
+public enum SoundFXType
+{
+    Button,
+    JigsawPut,
+    WinGame
 }

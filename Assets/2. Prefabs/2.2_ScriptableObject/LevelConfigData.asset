@@ -74,24 +74,34 @@ MonoBehaviour:
   - level: 3
     levelName: "M\xE0n ch\u01A1i 3"
     sizeMatrix: 4
-    originText: {fileID: 2800000, guid: 11becdec5d5ddec4fb9897287072ee33, type: 3}
-    animal: {fileID: 0}
+    originText: {fileID: 2800000, guid: 7f5036b7a68204743a778444bdf5f1da, type: 3}
+    animal: {fileID: 3050821205011851599, guid: 5625ccb97e349464a9f962b84c15f7d4, type: 3}
     levelStarConfig:
-      maxSecondToTake3Star: 0
-      maxSecondToTake2Star: 0
-      maxSecondToTake1Star: 0
+      maxSecondToTake3Star: 60
+      maxSecondToTake2Star: 90
+      maxSecondToTake1Star: 120
     levelSound:
-      eyeAudioClip: {fileID: 0}
-      noseAudioClip: {fileID: 0}
-      mouthAudioClip: {fileID: 0}
-      earAudioClip: {fileID: 0}
-      brainAudioClip: {fileID: 0}
-      footAudioClip: {fileID: 0}
-      leatherAudioClip: {fileID: 0}
-      tailAudioClip: {fileID: 0}
+      eyeAudioClip: {fileID: 8300000, guid: e57f6905a1ae1da41b801bc2509bb1db, type: 3}
+      noseAudioClip: {fileID: 8300000, guid: bef34814efd767e4491d909abd784e99, type: 3}
+      mouthAudioClip: {fileID: 8300000, guid: 06fd0c9dec60bfd4c9206ceb2a44c6d9, type: 3}
+      earAudioClip: {fileID: 8300000, guid: 6afe41962d980ec4cbee1b9d9cde966b, type: 3}
+      brainAudioClip: {fileID: 8300000, guid: 0a0f10de1675f3b4a921e94daaf09680, type: 3}
+      footAudioClip: {fileID: 8300000, guid: 50461da34f517814f8b54f6c12ee655b, type: 3}
+      leatherAudioClip: {fileID: 8300000, guid: e689346b88577a8428c3c69b4d203ead, type: 3}
+      tailAudioClip: {fileID: 8300000, guid: e3ba9443f4097a24d9ecb00ea18a734a, type: 3}
     levelAnimalImageGallery:
-      animalImageItems: []
-      urlVideo: 
+      animalImageItems:
+      - text: casau_1
+        image: {fileID: 21300000, guid: 5d9110fa7357b954ebe638b05e18cb95, type: 3}
+      - text: casau_2
+        image: {fileID: 21300000, guid: 305ed909ab837124c9e386970cf334d3, type: 3}
+      - text: casau_3
+        image: {fileID: 21300000, guid: 951360c714b4bac47b36aefc7aa51d91, type: 3}
+      - text: casau_4
+        image: {fileID: 21300000, guid: fda1250197ae2b74ab7ba5d1eaf76b2f, type: 3}
+      - text: casau_4
+        image: {fileID: 21300000, guid: 7f62804d17557374eac0c6bb86d3cfdc, type: 3}
+      urlVideo: https://www.youtube.com/watch?v=47sPGxjQ5N4&ab_channel=TinhV%C3%A2nChannel
   - level: 4
     levelName: "M\xE0n ch\u01A1i 4"
     sizeMatrix: 4

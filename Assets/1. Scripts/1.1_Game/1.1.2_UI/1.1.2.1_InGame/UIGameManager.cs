@@ -84,26 +84,31 @@ public class UIGameManager : Singleton<UIGameManager>
     private void OnClickResetGame()
     {
         GameController.Instance.ReStartGame();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonPause()
     {
         Time.timeScale = 0;
         _uIPausePopup.gameObject.SetActive(true);  
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     public void GoHome()
     {
         SceneLoader.Instance.LoadSceneAsync(0);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     public void NextLevel()
     {
         GameController.Instance.NextLevel();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonHint()
     {
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
         if(isHint) return;
         
         var cell = _puzzleUIBoard.GetRandomCellEmptyOrWrongPiece();

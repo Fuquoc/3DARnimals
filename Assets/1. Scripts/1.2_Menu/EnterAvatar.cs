@@ -35,10 +35,12 @@ public class EnterAvatar : MonoBehaviour
     {
         Debug.Log($"Avatar selected: {avatarData.avatarStructs[_currentIndex].avatarName}");
         _uINewPlayer.EnterAvatar(avatarData.avatarStructs[_currentIndex].avatarName);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnNextAvatar()
     {
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
         if (avatarData.avatarStructs.Count == 0) return;
 
         _currentIndex = (_currentIndex + 1) % avatarData.avatarStructs.Count; // Vòng tròn qua danh sách avatar
@@ -47,6 +49,7 @@ public class EnterAvatar : MonoBehaviour
 
     private void OnPrevAvatar()
     {
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
         if (avatarData.avatarStructs.Count == 0) return;
 
         _currentIndex = (_currentIndex - 1 + avatarData.avatarStructs.Count) % avatarData.avatarStructs.Count;

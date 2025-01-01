@@ -37,7 +37,7 @@ public class Player : Singleton<Player>
         playerData.age = -1;
         playerData.avatarName = string.Empty;
         playerData.soundVolumeSetting = 1;
-        playerData.musicVolumeSetting = 1;
+        playerData.musicVolumeSetting = 0.25f;
 
         foreach(var level in levelConfig.Levels)
         {

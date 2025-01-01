@@ -27,6 +27,7 @@ public class EnterName : MonoBehaviour
     private void OnClickButtonComfirm()
     {
         uINewPlayer.EnterName(tMP_InputFieldName.text);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnInputChange(string newValue)

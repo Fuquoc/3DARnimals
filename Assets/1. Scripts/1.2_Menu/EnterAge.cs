@@ -35,6 +35,7 @@ public class EnterAge : MonoBehaviour
     {
         uINewPlayer.EnterAge(currentAge); // Example: Assume SetPlayerAge exists in UINewPlayer
         Debug.Log($"Age confirmed: {currentAge}");
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonNextAge()
@@ -44,6 +45,7 @@ public class EnterAge : MonoBehaviour
             currentAge++;
             UpdateAgeText();
         }
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void OnClickButtonPreviousAge()
@@ -53,6 +55,7 @@ public class EnterAge : MonoBehaviour
             currentAge--;
             UpdateAgeText();
         }
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     private void UpdateAgeText()

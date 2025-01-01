@@ -30,6 +30,7 @@ public class UIButtonNarbar : MonoBehaviour
     private void OnClickButton()
     {
         uINarbar.ShowScreenByIndex(index);
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     public void Select()

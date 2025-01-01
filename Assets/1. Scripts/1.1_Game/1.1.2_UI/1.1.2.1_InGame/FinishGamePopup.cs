@@ -22,6 +22,7 @@ public class FinishGamePopup : MonoBehaviour
 
     public void Open()
     {
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.WinGame);
         gameObject.SetActive(true);
     }
 
@@ -129,6 +130,8 @@ public class FinishGamePopup : MonoBehaviour
         Debug.Log("Restart Game button clicked!");
         GameController.Instance.ReStartGame();
         Close();
+
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     // Hàm sự kiện khi nhấn nút Home
@@ -137,6 +140,7 @@ public class FinishGamePopup : MonoBehaviour
         Debug.Log("Home button clicked!");
         _UIGameManager.GoHome();
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     // Hàm sự kiện khi nhấn nút Next Level
@@ -145,6 +149,7 @@ public class FinishGamePopup : MonoBehaviour
         Debug.Log("Next Level button clicked!");
         _UIGameManager.NextLevel();
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 
     // Hàm sự kiện khi nhấn nút View 3D
@@ -154,5 +159,6 @@ public class FinishGamePopup : MonoBehaviour
         _UIGameManager.ShowUIAnimalView();
         GameController.Instance.View3D();
         Close();
+        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
     }
 }
