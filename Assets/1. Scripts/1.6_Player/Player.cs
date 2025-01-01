@@ -10,7 +10,13 @@ public class Player : Singleton<Player>
     private PlayerData playerData;
     public PlayerData GetPlayerData => playerData;
 
-    private void Awake() 
+    protected override void Awake() 
+    {
+        base.Awake();
+        CheckNewPlayer();
+    }
+
+    private void CheckNewPlayer()
     {
         var playerData = JsonDataHandler.LoadData<PlayerData>();
         if(playerData == default)
@@ -30,6 +36,8 @@ public class Player : Singleton<Player>
         playerData.name = string.Empty;
         playerData.age = -1;
         playerData.avatarName = string.Empty;
+        playerData.soundVolumeSetting = 1;
+        playerData.musicVolumeSetting = 1;
 
         foreach(var level in levelConfig.Levels)
         {
@@ -43,6 +51,23 @@ public class Player : Singleton<Player>
         }
 
         JsonDataHandler.SaveData(playerData);
+    }
+
+    public void SaveData(PlayerData playerData)
+    {
+        this.playerData = JsonDataHandler.SaveAndLoadData(playerData);
+    }
+
+    public void SaveMusicSetting(float volume)
+    {
+        playerData.musicVolumeSetting = volume;
+        SaveData(playerData);
+    }
+
+    public void SaveSoundSetting(float volume)
+    {
+        playerData.soundVolumeSetting = volume;
+        SaveData(playerData);
     }
 
     public void SavePlayerPassLevel(float time, int star)
@@ -78,6 +103,13 @@ public class Player : Singleton<Player>
 
         playerData = JsonDataHandler.SaveAndLoadData(playerData);
     }
+
+    public void ClearAllData()
+    {
+        JsonDataHandler.DeleteAllData();
+        SceneLoader.Instance.LoadSceneAsync(0);
+        CheckNewPlayer();
+    }
 }
 
 [System.Serializable]
@@ -86,6 +118,8 @@ public class PlayerData {
     public int age;
     public string avatarName;
     public int currentLevel = 0;
+    public float musicVolumeSetting;
+    public float soundVolumeSetting;
     public List<PlayerLevelData> playerLevelDatas = new List<PlayerLevelData>();
 }
 

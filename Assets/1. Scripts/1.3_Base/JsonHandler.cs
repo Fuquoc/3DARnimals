@@ -2,7 +2,8 @@ using System.Collections.Generic;
 using System.IO;
 using UnityEngine;
 
-public static class JsonDataHandler {
+public static class JsonDataHandler 
+{
     // Hàm lưu dữ liệu JSON
     public static void SaveData<T>(T data) {
         // Lấy tên class T làm tên file
@@ -79,5 +80,23 @@ public static class JsonDataHandler {
         {
             return default;
         }
+    }
+
+    public static void DeleteAllData()
+    {
+        // Lấy đường dẫn thư mục lưu dữ liệu
+        string directoryPath = Application.persistentDataPath;
+
+        // Lấy danh sách tất cả các file trong thư mục
+        string[] files = Directory.GetFiles(directoryPath, "*.json");
+
+        // Xóa từng file
+        foreach (string file in files)
+        {
+            File.Delete(file);
+            Debug.Log($"Đã xóa file: {file}");
+        }
+
+        Debug.Log("Tất cả dữ liệu đã được xóa.");
     }
 }

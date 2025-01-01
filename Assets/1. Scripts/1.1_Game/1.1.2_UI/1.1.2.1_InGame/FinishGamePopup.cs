@@ -69,7 +69,7 @@ public class FinishGamePopup : MonoBehaviour
     {
         _textLevelName.text = $"Màn chơi {level}";
         _textPieceCount.text = $"{sizeMatrix * sizeMatrix} Mảnh";
-        _textTime.text = $"Time: {FormatTime(timeInSeconds)}";
+        _textTime.text = $"Thời gian: {FormatTime(timeInSeconds)}";
         StartCoroutine(ShowStar(star));
         Player.Instance.SavePlayerPassLevel(timeInSeconds, star);
     }

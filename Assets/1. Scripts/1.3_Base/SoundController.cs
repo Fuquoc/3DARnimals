@@ -3,31 +3,27 @@ using UnityEngine;
 
 public class SoundController : Singleton<SoundController>
 {
-    private AudioSource _musicSource;
-    private AudioSource _soundEffectSource;
+    [SerializeField] private AudioSource _musicSource;
+    [SerializeField] private AudioSource _soundEffectSource;
 
     [Range(0, 1)] public float musicVolume = 1f; // Âm lượng nhạc nền
     [Range(0, 1)] public float soundEffectVolume = 1f; // Âm lượng sound effect
 
-    private void Awake()
+    protected override void Awake() 
     {
+        base.Awake();
+        
         // Tạo AudioSource cho nhạc nền nếu chưa có
-        _musicSource = gameObject.AddComponent<AudioSource>();
         _musicSource.loop = true; // Nhạc nền sẽ lặp lại
         _musicSource.playOnAwake = false; // Không phát tự động
         _musicSource.volume = musicVolume;
 
         // Tạo AudioSource cho sound effect nếu chưa có
-        _soundEffectSource = gameObject.AddComponent<AudioSource>();
         _soundEffectSource.loop = false; // Sound effect không lặp
         _soundEffectSource.playOnAwake = false; // Không phát tự động
         _soundEffectSource.volume = soundEffectVolume;
     }
 
-    /// <summary>
-    /// Phát nhạc nền.
-    /// </summary>
-    /// <param name="clip">Âm thanh nhạc nền</param>
     public void PlayMusic(AudioClip clip)
     {
         if (clip == null)
@@ -46,10 +42,6 @@ public class SoundController : Singleton<SoundController>
         _musicSource.Play();
     }
 
-    /// <summary>
-    /// Phát sound effect.
-    /// </summary>
-    /// <param name="clip">Âm thanh cần phát</param>
     public void PlaySoundEffect(AudioClip clip)
     {
         if (clip == null)
@@ -62,29 +54,44 @@ public class SoundController : Singleton<SoundController>
         _soundEffectSource.PlayOneShot(clip); // PlayOneShot cho phép phát nhiều sound effect đồng thời
     }
 
-    /// <summary>
-    /// Điều chỉnh âm lượng nhạc nền.
-    /// </summary>
-    /// <param name="volume">Giá trị âm lượng từ 0 đến 1</param>
+    public void ResumeSoundEffect()
+    {
+        if (_soundEffectSource.clip != null && !_soundEffectSource.isPlaying)
+        {
+            _soundEffectSource.Play();
+        }
+    }
+
+    public void PauseSoundEffect()
+    {
+        if (_soundEffectSource.isPlaying)
+        {
+            _soundEffectSource.Pause();
+        }
+    }
+
     public void SetMusicVolume(float volume)
     {
         musicVolume = Mathf.Clamp01(volume);
         _musicSource.volume = musicVolume;
     }
 
-    /// <summary>
-    /// Điều chỉnh âm lượng sound effect.
-    /// </summary>
-    /// <param name="volume">Giá trị âm lượng từ 0 đến 1</param>
     public void SetSoundEffectVolume(float volume)
     {
         soundEffectVolume = Mathf.Clamp01(volume);
         _soundEffectSource.volume = soundEffectVolume;
     }
 
-    /// <summary>
-    /// Dừng nhạc nền.
-    /// </summary>
+    public float GetMusicVolume()
+    {
+        return _musicSource.volume;
+    }
+
+    public float GetSoundVolume()
+    {
+        return _soundEffectSource.volume;
+    }
+
     public void StopMusic()
     {
         if (_musicSource.isPlaying)

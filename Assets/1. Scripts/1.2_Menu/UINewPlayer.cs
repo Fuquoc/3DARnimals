@@ -13,7 +13,7 @@ public class UINewPlayer : MonoBehaviour
 
     private void Start()
     {
-        currentPlayerData = JsonDataHandler.LoadData<PlayerData>();
+        currentPlayerData = Player.Instance.GetPlayerData;
 
         if(currentPlayerData.avatarName == string.Empty)
         {
@@ -47,6 +47,6 @@ public class UINewPlayer : MonoBehaviour
         enterAvatar.gameObject.SetActive(false);
         bg.SetActive(false);
 
-        JsonDataHandler.SaveData(currentPlayerData);
+        Player.Instance.SaveData(currentPlayerData);
     }
 }

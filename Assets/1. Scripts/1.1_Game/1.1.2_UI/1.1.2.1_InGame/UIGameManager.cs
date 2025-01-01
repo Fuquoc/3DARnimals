@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,9 +14,11 @@ public class UIGameManager : Singleton<UIGameManager>
     [SerializeField] private Button _buttonBack;
     [SerializeField] private Button _buttonHint;
     [SerializeField] private Button _buttonResetGame;
+    [SerializeField] private Button _buttonPause;
 
     [SerializeField] private GameObject _background;
     [SerializeField] private GameObject _uiAnimalView;
+    [SerializeField] private UIPausePopup _uIPausePopup;
 
     [SerializeField] private Image _originImage;
 
@@ -28,6 +31,7 @@ public class UIGameManager : Singleton<UIGameManager>
         _buttonResetGame.onClick.AddListener(OnClickResetGame);
         _buttonBack.onClick.AddListener(OnClickButtonBack);
         _buttonHint.onClick.AddListener(OnClickButtonHint);
+        _buttonPause.onClick.AddListener(OnClickButtonPause);
     }
 
     private void OnDisable()
@@ -37,6 +41,7 @@ public class UIGameManager : Singleton<UIGameManager>
         _buttonResetGame.onClick.RemoveListener(OnClickResetGame);
         _buttonHint.onClick.RemoveListener(OnClickButtonHint);
         _buttonBack.onClick.RemoveListener(OnClickButtonBack);
+        _buttonPause.onClick.RemoveListener(OnClickButtonPause);
     }
 
     private void ShowPopupFinishGame()
@@ -79,6 +84,12 @@ public class UIGameManager : Singleton<UIGameManager>
     private void OnClickResetGame()
     {
         GameController.Instance.ReStartGame();
+    }
+
+    private void OnClickButtonPause()
+    {
+        Time.timeScale = 0;
+        _uIPausePopup.gameObject.SetActive(true);  
     }
 
     public void GoHome()
