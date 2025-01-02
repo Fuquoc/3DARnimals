@@ -78,6 +78,9 @@ public class UISetting : MonoBehaviour
 
     private void OnClickClearData()
     {
-        Player.Instance.ClearAllData();
+        PopupManager.Instance.ShowPopup(2, "Không", "Có", "Cảnh báo", "Xóa toàn bộ dữ liệu bạn sẽ phải chơi lại từ đầu, bạn có chắc chắn không", null, () =>
+        {
+            Player.Instance.ClearAllData();
+        });
     }
 }

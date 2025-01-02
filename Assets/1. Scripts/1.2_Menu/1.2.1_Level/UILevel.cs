@@ -18,6 +18,8 @@ public class UILevel : MonoBehaviour
 
     [SerializeField] private GameObject[] starUIArray;
 
+    private bool isLock;
+
     private void OnEnable() 
     {
         _levelButton.onClick.AddListener(OnClickLevel);
@@ -33,7 +35,8 @@ public class UILevel : MonoBehaviour
         _levelConfigData = levelConfigData;
 
         _lock.SetActive(playerLevelData.pass == false && playerLevelData.isCurrentLevel == false);
-        _levelButton.enabled = playerLevelData.pass || playerLevelData.isCurrentLevel;
+        // _levelButton.enabled = playerLevelData.pass || playerLevelData.isCurrentLevel;
+        isLock = playerLevelData.pass == false && playerLevelData.isCurrentLevel == false;
 
         _originImage.sprite = Sprite.Create(_levelConfigData.originText, 
                                             new Rect(0, 0, _levelConfigData.originText.width, 
@@ -48,8 +51,15 @@ public class UILevel : MonoBehaviour
 
     private void OnClickLevel()
     {
-        LevelSelection.Instance.PlayLevel(_levelConfigData);
-        SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
+        if(isLock)
+        {
+            PopupManager.Instance.ShowPopup(1, "Đồng ý", "Đồng ý", "Thông báo", "Bạn phải hoàn thành màn chơi trước đó");
+        }
+        else 
+        {
+            LevelSelection.Instance.PlayLevel(_levelConfigData);
+            SoundController.Instance.PlaySoundEffectOneShot(SoundFXType.Button);
+        }
     }
 
     private void ShowStar(int star)

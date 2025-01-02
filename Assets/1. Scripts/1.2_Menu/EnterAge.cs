@@ -13,7 +13,7 @@ public class EnterAge : MonoBehaviour
     [SerializeField] private Button _buttonPreviousAge;
 
     private int currentAge = 18; // Default starting age
-    private const int minAge = 10; // Minimum allowed age
+    private const int minAge = 3; // Minimum allowed age
     private const int maxAge = 100; // Maximum allowed age
 
     private void OnEnable()
