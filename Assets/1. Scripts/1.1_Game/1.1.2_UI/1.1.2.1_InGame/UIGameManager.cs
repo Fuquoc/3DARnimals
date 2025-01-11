@@ -60,7 +60,8 @@ public class UIGameManager : Singleton<UIGameManager>
         {
             yield return null;
             Vector3 position = transform.localPosition;
-            position.x -= 1200f * Time.deltaTime;
+            position.x -= Screen.width * Time.deltaTime;
+            _background.transform.localPosition = position;
             transform.localPosition = position;
         }
 

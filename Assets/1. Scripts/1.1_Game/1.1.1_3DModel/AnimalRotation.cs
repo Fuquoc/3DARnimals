@@ -1,16 +1,18 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class AnimalRotation : MonoBehaviour
 {
-    public float rotationSpeed = 5f;      // Tốc độ xoay khi người dùng chạm hoặc kéo chuột
-    public float returnSpeed = 2f;        // Tốc độ quay về vị trí ban đầu
-    public float idleTime = 1f;           // Thời gian không tương tác để trở về góc ban đầu
+    public float rotationSpeed = 5f;      
+    public float returnSpeed = 2f;      
+    public float idleTime = 1f;           
 
-    private Quaternion initialRotation;   // Góc xoay ban đầu
-    private bool isTouching = false;      // Cờ kiểm tra có đang tương tác không
-    private float touchTimer = 0f;        // Bộ đếm thời gian không tương tác
-    private Vector2 previousMousePosition; // Vị trí chuột hoặc touch trước đó
+    private bool useReturnBack;
+    private Quaternion initialRotation;   
+    private bool isTouching = false;     
+    private float touchTimer = 0f;        
+    private Vector2 previousMousePosition;
 
     void Start()
     {
@@ -19,26 +21,13 @@ public class AnimalRotation : MonoBehaviour
 
     void Update()
     {
-        // // Kiểm tra thao tác trên điện thoại
-        // if (Input.touchCount > 0)
-        // {
-        //     isTouching = true;
-        //     touchTimer = 0f;
-
-        //     Touch touch = Input.GetTouch(0);
-        //     if (touch.phase == TouchPhase.Moved)
-        //     {
-        //         float rotationX = touch.deltaPosition.x * rotationSpeed * Time.deltaTime;
-        //         transform.Rotate(rotationX, 0, 0, Space.Self);
-        //     }
-        // }
         // Kiểm tra thao tác chuột trên máy tính
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetMouseButtonDown(0) && IsPointerOverUI() == false)
         {
             previousMousePosition = Input.mousePosition;
         }
 
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) && IsPointerOverUI() == false)
         {
             isTouching = true;
             touchTimer = 0f;
@@ -57,6 +46,7 @@ public class AnimalRotation : MonoBehaviour
         // Nếu không tương tác thì tăng timer và trở về góc ban đầu
         if (!isTouching)
         {
+            if(useReturnBack == false) return;
             touchTimer += Time.deltaTime;
 
             if (touchTimer >= idleTime)
@@ -66,9 +56,34 @@ public class AnimalRotation : MonoBehaviour
         }
 
         // Lưu lại vị trí chuột để tính toán delta khi tương tác tiếp
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0) && IsPointerOverUI() == false)
         {
             previousMousePosition = Input.mousePosition;
         }
+    }
+
+    public bool IsPointerOverUI()
+    {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            return true; // Chuột chạm vào UI
+        }
+
+        // Kiểm tra cho cảm ứng
+        if (Input.touchCount > 0)
+        {
+            Touch touch = Input.GetTouch(0);
+            if (EventSystem.current.IsPointerOverGameObject(touch.fingerId))
+            {
+                return true; // Cảm ứng chạm vào UI
+            }
+        }
+
+        return false; // Không chạm vào UI
+    }
+
+    public void TurnOnOffReturnBack(bool turn)
+    {
+        useReturnBack = turn;
     }
 }

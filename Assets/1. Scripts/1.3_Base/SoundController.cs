@@ -20,6 +20,16 @@ public class SoundController : Singleton<SoundController>
         _soundEffectSource.volume = cur.soundVolumeSetting;    
     }
 
+    private void OnEnable()
+    {
+        SceneLoader.Instance.OnLoadScene += OnLoadScene;
+    }
+
+    private void OnDisable()
+    {
+        SceneLoader.Instance.OnLoadScene -= OnLoadScene;
+    }
+
     protected override void Awake() 
     {
         base.Awake();
@@ -104,6 +114,14 @@ public class SoundController : Singleton<SoundController>
         }
     }
 
+    public void StopSoundEffect()
+    {
+        if (_soundEffectSource.isPlaying)
+        {
+            _soundEffectSource.Stop();
+        }  
+    } 
+
     public void SetMusicVolume(float volume)
     {
         musicVolume = Mathf.Clamp01(volume);
@@ -149,6 +167,10 @@ public class SoundController : Singleton<SoundController>
         _musicSource.volume = musicVolume;
     }
 
+    private void OnLoadScene(int sceneIndex)
+    {
+        StopSoundEffect();
+    }
 }
 
 [System.Serializable]

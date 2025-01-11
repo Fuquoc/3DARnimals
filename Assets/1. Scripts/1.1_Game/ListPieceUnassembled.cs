@@ -7,8 +7,9 @@ public class ListPieceUnassembled : MonoBehaviour
 {
     [SerializeField] private PuzzlePieceVisual _pieceVisualPrefab;
 
-     [SerializeField] private Transform _dragAreaTemp;
+    [SerializeField] private Transform _dragAreaTemp;
     [SerializeField] private Transform _content;
+    [SerializeField] private GameObject _antiTouchPanel;
 
     [SerializeField] private PuzzleUIBoard puzzleUIBoard;
 
@@ -21,6 +22,8 @@ public class ListPieceUnassembled : MonoBehaviour
 
     public void CreateUnassembledPiece(Texture2D texture2D, Piece piece) //Unassembled là chưa lắp ghép
     {
+        _antiTouchPanel.SetActive(true);
+
         var obj = Instantiate(_pieceVisualPrefab, _content);
         obj.Init(_dragAreaTemp, puzzleUIBoard);
         obj.CreatePieceVisual(piece, texture2D);
@@ -49,4 +52,30 @@ public class ListPieceUnassembled : MonoBehaviour
 
         return null;
     }
+
+    public void RandomPiece()
+    {
+        for (int i = _listPieceVisual.Count - 1; i > 0; i--)
+        {
+            int randomIndex;
+
+            do
+            {
+                randomIndex = Random.Range(0, i + 1);
+            } while (randomIndex == i);
+
+            PuzzlePieceVisual temp = _listPieceVisual[i];
+            _listPieceVisual[i] = _listPieceVisual[randomIndex];
+            _listPieceVisual[randomIndex] = temp;
+        }
+
+        for (int i = 0; i < _listPieceVisual.Count; i++)
+        {
+            _listPieceVisual[i].transform.SetSiblingIndex(i);
+        }
+
+        _antiTouchPanel.SetActive(false);
+    }
+
+
 }

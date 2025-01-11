@@ -21,8 +21,11 @@ public class LevelSelection : Singleton<LevelSelection>
         {
             if(level.level == _currentLevelSelect.level + 1)
             {
-                _currentLevelSelect = level;
-                break;
+                if(level.canPlay)
+                {
+                    _currentLevelSelect = level;
+                    break;
+                }
             }
         }
 

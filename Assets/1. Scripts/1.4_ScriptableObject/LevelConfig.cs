@@ -13,6 +13,7 @@ public class LevelConfig : ScriptableObject
 [System.Serializable]
 public class LevelConfigData
 {
+    public bool canPlay;
     public int level;
     public string levelName;
     public int sizeMatrix;

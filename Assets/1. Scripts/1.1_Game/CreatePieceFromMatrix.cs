@@ -49,6 +49,7 @@ public class CreatePieceFromMatrix : MonoBehaviour
             }
         }
         
+        listPieceUnassembled.RandomPiece();
         puzzleUIBoard.AttachScriptGameObject(puzzleMatrixGenerator);
         puzzleUIBoard.CreatePuzzleUIBoard(squareSize, rowLenght, colLenght);
     }
@@ -84,7 +85,8 @@ public class CreatePieceFromMatrix : MonoBehaviour
                 listPieceUnassembled.CreateUnassembledPiece(texturePiece, piece);
             }
         }
-
+        
+        listPieceUnassembled.RandomPiece();
         puzzleUIBoard.EmptyAll();
     }
 }

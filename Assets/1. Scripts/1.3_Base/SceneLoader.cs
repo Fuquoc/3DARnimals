@@ -2,13 +2,17 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
+using System;
 
 public class SceneLoader : Singleton<SceneLoader>
 {
     public Slider progressBar; // Slider để hiển thị tiến trình, nếu có
 
+    public Action<int> OnLoadScene;
+
     public void LoadSceneAsync(int sceneIndex)
     {
+        OnLoadScene?.Invoke(sceneIndex);
         StartCoroutine(LoadScene(sceneIndex));
     }
 

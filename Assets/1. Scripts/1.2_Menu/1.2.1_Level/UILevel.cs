@@ -34,9 +34,9 @@ public class UILevel : MonoBehaviour
     {
         _levelConfigData = levelConfigData;
 
-        _lock.SetActive(playerLevelData.pass == false && playerLevelData.isCurrentLevel == false);
+        _lock.SetActive(playerLevelData.pass == false && playerLevelData.isCurrentLevel == false || levelConfigData.canPlay == false);
         // _levelButton.enabled = playerLevelData.pass || playerLevelData.isCurrentLevel;
-        isLock = playerLevelData.pass == false && playerLevelData.isCurrentLevel == false;
+        isLock = playerLevelData.pass == false && playerLevelData.isCurrentLevel == false || levelConfigData.canPlay == false;
 
         _originImage.sprite = Sprite.Create(_levelConfigData.originText, 
                                             new Rect(0, 0, _levelConfigData.originText.width, 

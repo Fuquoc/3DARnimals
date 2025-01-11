@@ -66,13 +66,13 @@ public class ARRaycastHitFollower : MonoBehaviour
         }
     }
 
-    private void ActiveIndicator()
+    public void ActiveIndicator()
     {
         _isShowIndicator = true;
         _indicator.SetActive(true);
     }
 
-    private void DeActiveIndicator()
+    public void DeActiveIndicator()
     {
         _isShowIndicator = false;
         _indicator.SetActive(false);
